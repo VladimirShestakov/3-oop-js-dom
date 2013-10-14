@@ -49,9 +49,10 @@ var Chain = (function($, undefined){
         var cnt = Math.round(Math.random()*(max-min))+min;
         return {
             next: function(){
-                if (cnt-->0 && curr){
+                if (curr && (max === 0 && !this.completed() || cnt-->0)){
                     curr = curr.next();
-                    if (cnt < min && this.completed()) return this.next();
+                    // Если задано минимальное кол-во слов и текущий узел - точка
+                    if (min!==0 && cnt < min && this.completed()) return this.next();
                     return curr;
                 }
                 return undefined;
@@ -83,14 +84,14 @@ var Chain = (function($, undefined){
             case 'u':
 //            case 'li':
             case 'blockquote':
-                var words = text.match(/([\wа-яА-ЯёЁ*'-]+|[.,:!?]+)/g);
+                var words = text.match(/([a-zа-яА-ЯёЁ*'-]+|[.,:!?]+)/g);
                 if (words){
                     var i, cnt = words.length;
                     for (i=0; i<cnt; i+=1){
                         // Ключ нового узла зависит от предыдущих max_keys узлов
                         if (keys.length > this.pfx_length) keys = keys.slice(keys.length - this.pfx_length);
                         keys.push(words[i]+'#'+type);
-                        key = keys.join(' ').toLowerCase();
+                        key = keys.join(' ')/*.toLowerCase()*/;
                         // Создание/получение узла и добавление в родительский
                         if (typeof this.index[key] === 'undefined') this.index[key] = new Chain(words[i], type, this.root, keys);
                         if (!i && !this.index[key].isPunctuation() && type!=='li') self.root.children.push(this.index[key]);
@@ -105,7 +106,7 @@ var Chain = (function($, undefined){
 //            case 'ol':
                 if (keys.length > this.pfx_length) keys = keys.slice(keys.length - this.pfx_length);
                 keys.push(text+'#'+type);
-                key = keys.join(' ').toLowerCase();
+                key = keys.join(' ')/*.toLowerCase()*/;
                 if (typeof this.index[key] === 'undefined') this.index[key] = new Chain(text, type, this.root, keys);
                 self.root.children.push(this.index[key]);
                 self.children.push(this.index[key]);

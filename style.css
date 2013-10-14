@@ -66,8 +66,8 @@
     margin: 15px 0;
 }
 
-#bred_article .post_text:first-letter,
-#bred_article .post_title:first-letter
+#bred_article .post_text :first-letter,
+#bred_article .post_title :first-letter
 {
     text-transform: uppercase;
 }

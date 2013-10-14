@@ -14,8 +14,6 @@
     <link href="//habrahabr.ru/styles/1381160266/_parts/comments.css" rel="stylesheet" media="all">
     <link href="//habrahabr.ru/styles/1381160266/forms.css" rel="stylesheet" media="all">
     <link href="//habrahabr.ru/styles/1381160266/highlight.css" rel="stylesheet" media="all">
-    <link href="//habrahabr.ru/styles/1381160266/posts/all.css" rel="stylesheet" media="all">
-    <link href="//habrahabr.ru/styles/1381160266/printer.css" rel="stylesheet" media="print">
 </head>
 <body>
 <div class="wrapper">
@@ -148,6 +146,7 @@
             <label>Слов (в предложении):</label>
             <div>
                 <select name="words[min]">
+                    <option value="0">Авто</option>
                     <option value="2">2</option>
                     <option value="5" selected="selected">5</option>
                     <option value="10">10</option>
@@ -157,13 +156,15 @@
                 </select>
                 —
                 <select name="words[max]">
+                    <option value="0" selected="selected">Авто</option>
                     <option value="2">2</option>
                     <option value="5">5</option>
-                    <option value="10" selected="selected">10</option>
+                    <option value="10">10</option>
                     <option value="15">15</option>
                     <option value="20">20</option>
                     <option value="30">30</option>
                     <option value="30">50</option>
+
                 </select>
             </div>
         </div>
@@ -173,6 +174,9 @@
         </div>
     </div>
 </form>
+
+
+
 <!-- Ожидание -->
 <div id="bred_wait" style="display: none">
     Пишу, ждите...
